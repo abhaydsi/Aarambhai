@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AARAMBH AI - Team Dashboard</title>
+<style>
+/* ---------- Global Styles ---------- */
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffcc00;
+  color:#1f2937;
+}
+h1,h2,h3,h4,h5{margin:0;} 
+ul{list-style:none; padding:0; margin:0;} 
+a{text-decoration:none;}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  background:#003366;
+  color:white;
+  padding:1rem 2rem;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+  flex-wrap:wrap;
+}
+.navbar img {
+  width:50px;
+  height:50px;
+  border-radius:0px;
+}
+.navbar h1 {
+  font-size:1.8rem;
+}
+
+/* ---------- Project Info Card ---------- */
+.project-card {
+  max-width:83%;
+  margin:2rem auto;
+  background:white;
+  border-radius:16px;
+  padding:1.5rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  text-align:left;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+.project-card h2{
+  color:orange;
+  margin-bottom:0.5rem;
+}
+.project-card p{
+  color:black;
+  font-size:0.95rem;
+  margin:4px 0;
+}
+
+/* ---------- Member Cards ---------- */
+.team-container {
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  padding:2rem;
+  max-width:800px;
+  margin:0 auto;
+}
+
+.member-card {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  background:white;
+  border-radius:16px;
+  padding:1rem 1.5rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.member-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow:0 12px 20px rgba(0,0,0,0.2);
+}
+
+.member-card img {
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:3px solid #4f46e5;
+  margin:0.5rem;
+}
+
+.member-info {
+  flex:1;
+  padding:0.5rem 1rem;
+}
+
+.member-info h2 {
+  color:#4f46e5;
+  margin-bottom:0.25rem;
+}
+.member-info p {
+  color:#6b7280;
+  font-size:0.9rem;
+  margin:3px 0;
+}
+
+/* ---------- Social Buttons ---------- */
+.social-buttons {
+  margin-top:0.5rem;
+  display:flex;
+  gap:0.5rem;
+}
+.social-buttons a {
+  color:white;
+  padding:0.4rem 0.7rem;
+  border-radius:6px;
+  font-size:0.85rem;
+  transition: transform 0.3s, background 0.3s;
+}
+.social-buttons a:hover {transform:scale(1.1);}
+.linkedin {background:#0A66C2;}
+.linkedin:hover {background:#000;}
+.github {background:#0A66C2;}
+.github:hover {background:#000;}
+.instagram {background:#0A66C2;}
+.instagram:hover {background:#000;}
+
+/* Alternate card layout */
+.member-card.left img {order:0;}
+.member-card.left .member-info {order:1;}
+
+.member-card.right img {order:1;}
+.member-card.right .member-info {order:0;}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <img src="a.jpg" alt="Team Logo">
+  <h1>AARAMBH AI</h1>
+</div>
+
+<!-- Project Info Card -->
+<div class="project-card">
+  <h2>Project: Automated Smart Attendance System</h2>
+  <p><strong>Description:</strong> An offline attendance system for students and faculty using Iris and Face recognition. It marks morning, midday, and exit attendance, detects late arrivals, and queues notifications for parents via SMS using GSM modems.</p>
+  <p><strong>Technologies:</strong> Python (Flask/Django), PostgreSQL, React.js, OpenCV, GSM Modem, AES Encryption</p>
+</div>
+
+<!-- Team Members -->
+<div class="team-container" id="teamContainer">
+  <h1>Team Members</h1>
+</div>
+
+<script>
+const members = [
+  {name:"Ipshita Pandey", role:"Team Leader", institution:"School Of Management Sciences, Lucknow", avatar:"e.jpg", social:{linkedin:"https://www.linkedin.com/in/ipshita-pandey-0b9544382",github:"#",instagram:"https://www.instagram.com/_ipshitaa_31"}},
+  {name:"Arun Kumar Yadav", role:"System Development", institution:"School Of Management Sciences, Lucknow", avatar:"f.jpg", social:{linkedin:"https://www.linkedin.com/in/arunyadav7333",github:"#",instagram:"https://www.instagram.com/arun.yadav_27"}},
+  {name:"Aditya Pratap Singh", role:"Designer", institution:"School Of Management Sciences, Lucknow", avatar:"d.jpg", social:{linkedin:"https://www.linkedin.com/in/adityap0911",github:"#",instagram:"https://www.instagram.com/_aaditya091"}},
+  {name:"Abhay Kumar", role:"Backend", institution:"School Of Management Sciences, Lucknow", avatar:"b.jpg", social:{linkedin:"https://www.linkedin.com/in/abhaykumar0705",github:"https://www.linkedin.com/in/abhaykumar0705",instagram:"https://www.instagram.com/abhaykushwaha._"}},
+  {name:"Praveen Yadav", role:"Frontend", institution:"School Of Management Sciences, Lucknow", avatar:"g.jpg", social:{linkedin:"https://www.linkedin.com/in/praveen-yadav-82a6b5376",github:"#",instagram:"https://www.instagram.com/praveen.yaduvanshi77"}},
+  {name:"Sujan Singh", role:"Data Collector", institution:"School Of Management Sciences, Lucknow", avatar:"c.jpg", social:{linkedin:"https://www.linkedin.com/in/sujan-singh-628746383",github:"#",instagram:"https://www.instagram.com/sujan_singh1177"}}
+];
+
+const container = document.getElementById("teamContainer");
+
+members.forEach((member, index)=>{
+  const card = document.createElement("div");
+  card.className = "member-card " + (index%2===0 ? "left" : "right"); // alternate left/right
+
+  card.innerHTML = `
+    <img src="${member.avatar}" alt="${member.name}">
+    <div class="member-info">
+      <h2>${member.name}</h2>
+      <p><strong>Role:</strong> ${member.role}</p>
+      <p><strong>Institution:</strong> ${member.institution}</p>
+      <div class="social-buttons">
+        <a href="${member.social.linkedin}" class="linkedin" target="_blank">LinkedIn</a>
+        <a href="${member.social.github}" class="github" target="_blank">GitHub</a>
+        <a href="${member.social.instagram}" class="instagram" target="_blank">instagram</a>
+      </div>
+    </div>
+  `;
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
