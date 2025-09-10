@@ -4,17 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AARAMBH AI - Team Dashboard</title>
+
+<!-- Premium Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Raleway:wght@600;700&display=swap" rel="stylesheet">
+
 <style>
 /* ---------- Global Styles ---------- */
 body {
   margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #ffcc00;
-  color:#1f2937;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color:#fff;
 }
-h1,h2,h3,h4,h5{margin:0;} 
+h1,h2,h3,h4,h5{
+  margin:0;
+  font-family: 'Raleway', sans-serif;
+  font-weight:600;
+  letter-spacing:0.5px;
+} 
 ul{list-style:none; padding:0; margin:0;} 
-a{text-decoration:none;}
+a{text-decoration:none; font-family:'Poppins', sans-serif;}
 
 /* ---------- Navbar ---------- */
 .navbar {
@@ -24,119 +33,154 @@ a{text-decoration:none;}
   background:#003366;
   color:white;
   padding:1rem 2rem;
-  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+  box-shadow:0 4px 8px rgba(0,0,0,0.3);
   flex-wrap:wrap;
 }
 .navbar img {
   width:50px;
   height:50px;
-  border-radius:0px;
 }
 .navbar h1 {
-  font-size:1.8rem;
+  font-size:2rem;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+/* ---------- Glow Card Base ---------- */
+.card {
+  position:relative;
+  border-radius:20px;
+  cursor:pointer;
+}
+.card-content {
+  position:relative;
+  background: #000; /* glassmorphism */
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-radius: inherit;
+  padding:1.5rem;
+  z-index:1;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* gradient animation */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* glowing border */
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  padding:2px; 
+  background: linear-gradient(270deg,#ff0057,#00f0ff,#00ff84,#ffef00,#ff0057);
+  background-size:400% 400%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; 
+  opacity:0;
+  transition:opacity .3s ease;
+  z-index:0;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background: linear-gradient(90deg,#ff0057,#00f0ff,#00ff84,#ffef00,#ff0057);
+  background-size:400% 400%;
+  filter: blur(18px);
+  opacity:0;
+  transition:opacity .3s ease;
+  z-index:-1;
+}
+.card.active::before,
+.card.active::after{
+  opacity:1;
+  animation: gradientShift 6s ease infinite;
 }
 
 /* ---------- Project Info Card ---------- */
 .project-card {
-  max-width:83%;
+  max-width:595px;
   margin:2rem auto;
-  background:white;
-  border-radius:16px;
-  padding:1.5rem;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
   text-align:left;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.project-card:hover{
-  transform: translateY(-5px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 .project-card h2{
-  color:orange;
+  color:#fff;
   margin-bottom:0.5rem;
+  font-size:1.6rem;
 }
 .project-card p{
-  color:black;
+  color:#ddd;
   font-size:0.95rem;
   margin:4px 0;
+  line-height:1.5;
 }
 
-/* ---------- Member Cards ---------- */
-.team-container {
+/* ---------- Team Container ---------- */
+#teamContainer {
   display:flex;
   flex-direction:column;
-  gap:1.5rem;
-  padding:2rem;
-  max-width:800px;
-  margin:0 auto;
+  gap:25px;
+  max-width:750px;
+  margin:2rem auto;
+  padding:0 1rem;
 }
-
-.member-card {
+#teamContainer h1 {
+  font-size:1.9rem;
+  margin-bottom:0.5rem;
+}
+.member {
   display:flex;
   flex-wrap:wrap;
   align-items:center;
-  background:white;
-  border-radius:16px;
-  padding:1rem 1.5rem;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.5s, box-shadow 0.5s;
+  gap:1rem;
 }
-
-.member-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow:0 12px 20px rgba(0,0,0,0.2);
-}
-
-.member-card img {
+.member img {
   width:120px;
   height:120px;
   border-radius:50%;
-  border:3px solid #4f46e5;
-  margin:0.5rem;
+  border:3px solid transparent;
+  background: linear-gradient(135deg, #ff0057, #00f0ff, #00ff84, #ffef00);
+  padding:3px;
 }
-
-.member-info {
-  flex:1;
-  padding:0.5rem 1rem;
-}
-
-.member-info h2 {
-  color:#4f46e5;
+.member-info h3 {
+  color:#fff;
   margin-bottom:0.25rem;
+  font-size:1.3rem;
 }
 .member-info p {
-  color:#6b7280;
+  color:#ccc;
   font-size:0.9rem;
   margin:3px 0;
 }
 
 /* ---------- Social Buttons ---------- */
 .social-buttons {
-  margin-top:0.5rem;
+  margin-top:0.7rem;
   display:flex;
   gap:0.5rem;
 }
 .social-buttons a {
   color:white;
   padding:0.4rem 0.7rem;
-  border-radius:6px;
+  border-radius:4px;
   font-size:0.85rem;
   transition: transform 0.3s, background 0.3s;
+  font-weight:500;
+  letter-spacing:0.3px;
 }
 .social-buttons a:hover {transform:scale(1.1);}
 .linkedin {background:#0A66C2;}
-.linkedin:hover {background:#000;}
-.github {background:#0A66C2;}
-.github:hover {background:#000;}
-.instagram {background:#0A66C2;}
-.instagram:hover {background:#000;}
-
-/* Alternate card layout */
-.member-card.left img {order:0;}
-.member-card.left .member-info {order:1;}
-
-.member-card.right img {order:1;}
-.member-card.right .member-info {order:0;}
+.github {background:#333;}
+.instagram {background:#E4405F;}
 </style>
 </head>
 <body>
@@ -148,14 +192,16 @@ a{text-decoration:none;}
 </div>
 
 <!-- Project Info Card -->
-<div class="project-card">
-  <h2>Project: Automated Smart Attendance System</h2>
-  <p><strong>Description:</strong> An offline attendance system for students and faculty using Iris and Face recognition. It marks morning, midday, and exit attendance, detects late arrivals, and queues notifications for parents via SMS using GSM modems.</p>
-  <p><strong>Technologies:</strong> Python (Flask/Django), PostgreSQL, React.js, OpenCV, GSM Modem, AES Encryption</p>
+<div class="card project-card active" id="projectCard">
+  <div class="card-content">
+    <h2>Project: Automated Smart Attendance System</h2>
+    <p><strong>Description:</strong> An offline attendance system for students and faculty using Iris and Face recognition. It marks morning, midday, and exit attendance, detects late arrivals, and queues notifications for parents via SMS using GSM modems.</p>
+    <p><strong>Technologies:</strong> Python (Flask/Django), PostgreSQL, React.js, OpenCV, GSM Modem, AES Encryption</p>
+  </div>
 </div>
 
 <!-- Team Members -->
-<div class="team-container" id="teamContainer">
+<div id="teamContainer">
   <h1>Team Members</h1>
 </div>
 
@@ -171,24 +217,35 @@ const members = [
 
 const container = document.getElementById("teamContainer");
 
-members.forEach((member, index)=>{
+// create member cards
+members.forEach((member)=>{
   const card = document.createElement("div");
-  card.className = "member-card " + (index%2===0 ? "left" : "right"); // alternate left/right
+  card.className = "card";
 
   card.innerHTML = `
-    <img src="${member.avatar}" alt="${member.name}">
-    <div class="member-info">
-      <h2>${member.name}</h2>
-      <p><strong>Role:</strong> ${member.role}</p>
-      <p><strong>Institution:</strong> ${member.institution}</p>
-      <div class="social-buttons">
-        <a href="${member.social.linkedin}" class="linkedin" target="_blank">LinkedIn</a>
-        <a href="${member.social.github}" class="github" target="_blank">GitHub</a>
-        <a href="${member.social.instagram}" class="instagram" target="_blank">instagram</a>
+    <div class="card-content">
+      <div class="member">
+        <img src="${member.avatar}" alt="${member.name}">
+        <div class="member-info">
+          <h3>${member.name}</h3>
+          <p><strong>Role:</strong> ${member.role}</p>
+          <p><strong>Institution:</strong> ${member.institution}</p>
+          <div class="social-buttons">
+            <a href="${member.social.linkedin}" class="linkedin" target="_blank">LinkedIn</a>
+            <a href="${member.social.github}" class="github" target="_blank">GitHub</a>
+            <a href="${member.social.instagram}" class="instagram" target="_blank">Instagram</a>
+          </div>
+        </div>
       </div>
     </div>
   `;
   container.appendChild(card);
+
+  // Click logic: only one active at a time
+  card.addEventListener("click", ()=>{
+    document.querySelectorAll("#teamContainer .card").forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+  });
 });
 </script>
 
