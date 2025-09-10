@@ -49,7 +49,7 @@ a{text-decoration:none; font-family:'Poppins', sans-serif;}
 /* ---------- Glow Card Base ---------- */
 .card {
   position:relative;
-  border-radius:20px;
+  border-radius:0px;
   cursor:pointer;
 }
 .card-content {
@@ -76,7 +76,7 @@ a{text-decoration:none; font-family:'Poppins', sans-serif;}
   content:"";
   position:absolute; inset:0;
   border-radius:inherit;
-  padding:2px; 
+  padding:0px; 
   background: linear-gradient(270deg,#ff0057,#00f0ff,#00ff84,#ffef00,#ff0057);
   background-size:400% 400%;
   -webkit-mask: 
@@ -108,9 +108,12 @@ a{text-decoration:none; font-family:'Poppins', sans-serif;}
 
 /* ---------- Project Info Card ---------- */
 .project-card {
-  max-width:595px;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  max-width:750px;
   margin:2rem auto;
-  text-align:left;
+  padding:0 1rem;
 }
 .project-card h2{
   color:#fff;
